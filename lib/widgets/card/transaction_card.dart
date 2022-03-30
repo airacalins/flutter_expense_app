@@ -19,14 +19,13 @@ class TransactionCard extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.symmetric(horizontal: 5, vertical: 7.5),
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blueGrey, width: 2)),
+              decoration: BoxDecoration(border: Border.all(color: Theme.of(context).primaryColor, width: 2)),
               width: 80,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("₱", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueGrey)),
-                  Text("${transaction.amount}", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueGrey))
+                  Text("₱", style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor)),
+                  Text("${transaction.amount.toStringAsFixed(2)}", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueGrey))
                 ],
               ),
             ),
