@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import '../../models/transaction.dart';
 import '../../widgets/card/transaction_card.dart';
 
-class TransactionsList extends StatelessWidget {
+class Transactions extends StatelessWidget {
   List<Transaction> transactions;
 
-  TransactionsList(this.transactions);
+  Transactions(this.transactions);
 
   @override
   Widget build(BuildContext context) {
