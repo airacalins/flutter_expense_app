@@ -1,6 +1,5 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, deprecated_member_use
 import 'package:flutter/material.dart';
-import 'package:personal_expense/sample/date_picker.dart';
 
 import './models/transaction.dart';
 import './screens/transaction/transactions.dart';
@@ -14,26 +13,24 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Personal Expenses',
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-        accentColor: Colors.amber,
-        fontFamily: 'Quicksand',
-        textTheme: ThemeData.light().textTheme.copyWith(
-          titleSmall: TextStyle(
-             fontFamily: 'Opensans',
-             fontWeight: FontWeight.bold,
-             fontSize: 18
-          )
-        ),
-        appBarTheme: AppBarTheme(
+          primarySwatch: Colors.blueGrey,
+          accentColor: Colors.amber,
+          fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
-            headline6: TextStyle(
-              fontFamily: 'Opensans')), )
-      ),
+              titleSmall: TextStyle(
+                  fontFamily: 'Opensans',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18)),
+          appBarTheme: AppBarTheme(
+            textTheme: ThemeData.light()
+                .textTheme
+                .copyWith(headline6: TextStyle(fontFamily: 'Opensans')),
+          )),
       home: MyHomePage(),
     );
   }
 }
- 
+
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -59,6 +56,10 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _deleteTransaction(String id) {
+    setState(() =>_transactions.removeWhere((t) => t.id == id));
+  }
+
   void _openCreateTransactionModal(BuildContext ctx) {
     showModalBottomSheet(
       context: ctx,
@@ -71,27 +72,24 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
- 
+
   @override
   Widget build(BuildContext context) {
-    return 
-      Scaffold(
-        appBar: AppBar(
-          title: Text('Personal Expenses'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.add), 
-              onPressed: () => _openCreateTransactionModal(context)
-            ),
-          ],
-        ),
-        body: Transactions(_transactions),
-        // body: DatePicker(),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () => _openCreateTransactionModal(context),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      ); 
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Personal Expenses'),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () => _openCreateTransactionModal(context)),
+        ],
+      ),
+      body: Transactions(_transactions, _deleteTransaction),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => _openCreateTransactionModal(context),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
   }
 }
