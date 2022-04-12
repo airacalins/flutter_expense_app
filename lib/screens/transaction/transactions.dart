@@ -13,7 +13,6 @@ class Transactions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 400,
       child: transactions.isEmpty ? 
         Column(
           children: <Widget>[
@@ -24,7 +23,7 @@ class Transactions extends StatelessWidget {
             Container(
               child: Image.asset('assets/images/waiting.png', fit: BoxFit.cover,),
               height: 200,
-             )
+            )
           ],
         )
         :
