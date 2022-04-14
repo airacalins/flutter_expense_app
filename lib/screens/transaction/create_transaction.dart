@@ -1,11 +1,15 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors
 
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class CreateTransaction extends StatefulWidget {
   final Function createTransaction;
-  CreateTransaction(this.createTransaction);
+
+  const CreateTransaction(this.createTransaction);
 
   @override
   State<CreateTransaction> createState() => _CreateTransactionState();
@@ -48,12 +52,12 @@ class _CreateTransactionState extends State<CreateTransaction> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 TextField(
-                  decoration: InputDecoration(labelText: 'Title'),
+                  decoration: const InputDecoration(labelText: 'Title'),
                   controller: _titleController,
                   onSubmitted: (_) => _submitData(),
                 ),
                 TextField(
-                  decoration: InputDecoration(labelText: 'Amount'),
+                  decoration: const InputDecoration(labelText: 'Amount'),
                   controller: _amountController,
                   keyboardType: TextInputType.number,
                   onSubmitted: (_) => _submitData(),
@@ -63,12 +67,20 @@ class _CreateTransactionState extends State<CreateTransaction> {
                   child: Row(
                     children: [
                       Expanded(child: Text(_selectedDate == null ? 'No date chosen!' : "Picked Date: ${DateFormat.yMMMd().format(_selectedDate!)}")),
-                      TextButton(
-                        child: Text(
-                          _selectedDate == null ? 'Choose Date' : 'Change Date',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        onPressed: _showDatePicker
+                      Platform.isIOS
+                      ? CupertinoButton(
+                          child: Text(
+                            _selectedDate == null ? 'Choose Date' : 'Change Date',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          onPressed: _showDatePicker
+                      )
+                      : TextButton(
+                          child: Text(
+                            _selectedDate == null ? 'Choose Date' : 'Change Date',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          onPressed: _showDatePicker
                       )
                     ],
                   ),
@@ -76,7 +88,7 @@ class _CreateTransactionState extends State<CreateTransaction> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: ElevatedButton(
-                    child: Text('Add Transaction'),
+                    child: const Text('Add Transaction'),
                     onPressed: _submitData,
                   ),
                 )

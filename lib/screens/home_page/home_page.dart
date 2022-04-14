@@ -1,5 +1,5 @@
-// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +16,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _transactions = [
-    Transaction(id: "1", title: 'Transaction 1', amount: 99.99, date: DateTime.now()),
-    Transaction(id: "2", title: 'Transaction 2', amount: 29.99, date: DateTime.now()),
-    Transaction(id: "3", title: 'Transaction 3', amount: 39.99, date: DateTime.now()),
-    Transaction(id: "4", title: 'Transaction 4', amount: 49.99, date: DateTime.now()),
+    // Transaction(id: "1", title: 'Transaction 1', amount: 99.99, date: DateTime.now()),
+    // Transaction(id: "2", title: 'Transaction 2', amount: 29.99, date: DateTime.now()),
+    // Transaction(id: "3", title: 'Transaction 3', amount: 39.99, date: DateTime.now()),
+    // Transaction(id: "4", title: 'Transaction 4', amount: 49.99, date: DateTime.now()),
   ];
 
   void _createTransaction(String title, double amount) {
@@ -55,27 +55,27 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final PreferredSizeWidget appBar = Platform.isIOS 
       ? CupertinoNavigationBar(
-        middle: Text("Personal Expenses"),
+        middle: const Text("Personal Expenses"),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
           GestureDetector(
-            child: Icon(CupertinoIcons.add),
+            child: const Icon(CupertinoIcons.add),
             onTap: () => _openCreateTransactionModal(context),
             )
         ]),
       )
       : AppBar(
-        title: Text('Personal Expenses'),
+        title: const Text('Personal Expenses'),
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.add),
+              icon: const Icon(Icons.add),
               onPressed: () => _openCreateTransactionModal(context)),
         ],
       ) as PreferredSizeWidget;
 
     final pageBody = SafeArea(
-      child: Container(
+      child: SizedBox(
       height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 1,
       child: Transactions(_transactions, _deleteTransaction)
     ));
@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
         floatingActionButton: Platform.isIOS 
           ? Container() 
           : FloatingActionButton(
-              child: Icon(Icons.add),
+              child: const Icon(Icons.add),
               onPressed: () => _openCreateTransactionModal(context),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

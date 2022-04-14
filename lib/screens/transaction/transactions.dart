@@ -1,4 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace, use_key_in_widget_constructors, must_be_immutable
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable
 
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class Transactions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: transactions.isEmpty ? 
         Column(
@@ -22,7 +22,7 @@ class Transactions extends StatelessWidget {
               padding: const EdgeInsets.all(25),
               child: Text('No transactions added yet!', style: Theme.of(context).textTheme.titleSmall),
             ),
-            Container(
+            SizedBox(
               child: Image.asset('assets/images/waiting.png', fit: BoxFit.cover,),
               height: 200,
             )

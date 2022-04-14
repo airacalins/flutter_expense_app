@@ -1,18 +1,20 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable, use_key_in_widget_constructors
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import '../../models/transaction.dart';
 
 class TransactionCard extends StatelessWidget {
   Transaction transaction;
   final Function deleteTransaction;
 
-  TransactionCard(this.transaction, this.deleteTransaction);
+  TransactionCard(this.transaction, this.deleteTransaction, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       elevation: 5,
       child: ListTile(
         leading: CircleAvatar(
@@ -25,7 +27,7 @@ class TransactionCard extends StatelessWidget {
         title: Text(transaction.title),
         subtitle: Text(DateFormat.yMMMd().format(transaction.date)),
         trailing: IconButton(
-          icon: Icon(Icons.delete),
+          icon: const Icon(Icons.delete),
           color: Theme.of(context).errorColor,
           onPressed: () => deleteTransaction(transaction.id),
         ),
